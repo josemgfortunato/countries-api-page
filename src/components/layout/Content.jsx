@@ -5,11 +5,11 @@ import axios from "axios";
 
 const Content = () => {
   const [inputValue, setInputValue] = useState("");
-  const [selectValue, setSelectValue] = useState("All");
+  const [selectValue, setSelectValue] = useState("");
   const [countries, setCountries] = useState([]);
 
   useEffect(() => {
-    if (selectValue === "All") {
+    if (selectValue === "") {
       const fetchData = async () => {
         await axios
           .get("https://restcountries.com/v3.1/all")
@@ -20,8 +20,8 @@ const Content = () => {
       fetchData();
     }
 
-    if (selectValue !== "All") {
-      const fetchData = async () => {
+    if (selectValue !== "") {
+      fetchData = async () => {
         await axios
           .get(`https://restcountries.com/v3.1/region/${selectValue}`)
           .then((response) => {

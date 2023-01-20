@@ -7,7 +7,7 @@ const ContentHeader = ({
   inputValue,
   setInputValue,
 }) => {
-  const regions = ["All", "Africa", "Americas", "Asia", "Europe", "Oceania"];
+  const regions = ["Africa", "Americas", "Asia", "Europe", "Oceania"];
 
   const handleSelectChange = (e) => {
     setSelectValue(e.target.value);
@@ -34,11 +34,12 @@ const ContentHeader = ({
       />
       <div className="flex gap-2 items-center">
         <select
-          id="region"
+          name="Filter by Region"
           className="p-4 w-52 shadow-black shadow-md rounded-md dark:bg-darkTheme-elements dark:text-darkTheme-color"
           value={selectValue}
           onChange={handleSelectChange}
         >
+          <option value="">Filter by Region</option>
           {regions.map((region, key) => (
             <option key={key} value={region}>
               {region}

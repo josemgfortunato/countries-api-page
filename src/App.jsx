@@ -3,8 +3,7 @@ import CountryPage from "./components/CountryPage";
 import Content from "./components/layout/Content";
 import Header from "./components/layout/Header";
 
-function App() { 
-
+function App() {
   return (
     <div className="bg-lightTheme-background dark:bg-darkTheme-background w-screen min-h-screen flex flex-col pb-16">
       <Header />

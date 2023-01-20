@@ -1,4 +1,4 @@
-import { IconButton } from "@mui/material";
+import { Box, IconButton } from "@mui/material";
 import { BsMoon } from "react-icons/bs";
 import { MdOutlineLightMode } from "react-icons/md";
 import { useTheme } from "../../hooks/useTheme";
@@ -10,7 +10,7 @@ const Header = () => {
   };
 
   return (
-    <div className="bg-lightTheme-elements text-lightTheme-color dark:text-darkTheme-color dark:bg-darkTheme-elements h-24 desktop:px-20 mobile:px-4 flex items-center justify-between">
+    <Box className="bg-lightTheme-elements text-lightTheme-color dark:text-darkTheme-color dark:bg-darkTheme-elements h-24 desktop:px-20 mobile:px-4 flex items-center justify-between">
       <span className="font-bold desktop:text-2xl">Where in the world?</span>
       <div className="flex gap-2 items-center">
         <IconButton size="medium" onClick={() => themeToggler()}>
@@ -24,7 +24,7 @@ const Header = () => {
           {theme === "light" ? "Dark Mode" : "Light Mode"}
         </span>
       </div>
-    </div>
+    </Box>
   );
 };
 

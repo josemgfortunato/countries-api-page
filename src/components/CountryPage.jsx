@@ -1,4 +1,5 @@
 import { Box, Button, Chip } from "@mui/material";
+import axios from "axios";
 import { MdKeyboardBackspace } from "react-icons/md";
 import { useQuery } from "react-query";
 import { useNavigate, useParams } from "react-router-dom";
@@ -15,6 +16,12 @@ const CountryPage = () => {
 
   if (status === "loading") return "";
   if (error === "error") return "";
+
+  const handleBorderCountry = async (border) => {
+    await axios
+      .get(`https://restcountries.com/v3.1/alpha/${border}`)
+      .then((response) => response.data);
+  };
 
   return (
     <div className="flex flex-col bg-lightTheme-background dark:bg-darkTheme-background text-lightTheme-color dark:text-darkTheme-color desktop:p-20 mobile:p-10 gap-16 h-screen">
@@ -50,7 +57,7 @@ const CountryPage = () => {
             <div>
               <div>
                 <span className="text-base font-bold">Native Name: </span>
-                {""}
+                {Object.entries(country[0].name.nativeName).map((value) => value[1].common)}
               </div>
               <div>
                 <span className="text-base font-bold">Population: </span>
@@ -76,21 +83,32 @@ const CountryPage = () => {
               </div>
               <div>
                 <span className="text-base font-bold">Currencies: </span>
-                {Object.keys(country[0].currencies)}
+                {Object.entries(country[0].currencies)
+                  .map((value) => value[1].name)
+                  .join(", ")}
               </div>
               <div>
                 <span className="text-base font-bold">Languages: </span>
-                {Object.keys(country[0].languages).map(language => Object.values(language))}
+                {Object.entries(country[0].languages)
+                  .map((value) => value[1])
+                  .join(", ")}
               </div>
             </div>
           </div>
           <div className="flex desktop:flex-row mobile:flex-col desktop:items-center gap-4 mb-20">
             <div>
-              <span className="text-lightTheme-color dark:text-darkTheme-color text-base font-bold">Border Countries: </span>
+              <span className="text-lightTheme-color dark:text-darkTheme-color text-base font-bold">
+                Border Countries:{" "}
+              </span>
             </div>
             <div className="flex flex-wrap gap-2">
               {country[0].borders?.map((border, key) => (
-                <Chip className="text-lightTheme-color dark:text-darkTheme-color" key={key} label={border} variant="filled" />
+                <Chip
+                  className="text-lightTheme-color dark:text-darkTheme-color"
+                  key={key}
+                  label={border}
+                  variant="filled"
+                />
               ))}
             </div>
           </div>
