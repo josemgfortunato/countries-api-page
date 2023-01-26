@@ -1,5 +1,4 @@
 import { Box, Button, Chip } from "@mui/material";
-import axios from "axios";
 import { MdKeyboardBackspace } from "react-icons/md";
 import { useQuery } from "react-query";
 import { useNavigate, useParams } from "react-router-dom";
@@ -8,23 +7,13 @@ import { getCountry } from "../api/countries";
 const CountryPage = () => {
   const navigate = useNavigate();
   const { id } = useParams();
-  const {
-    status,
-    error,
-    data: country,
-  } = useQuery({ queryKey: ["country", id], queryFn: () => getCountry(id) });
+  const { status, error, data: country } = useQuery({ queryKey: ["country", id], queryFn: () => getCountry(id).then(res => res.data) });
 
   if (status === "loading") return "";
   if (error === "error") return "";
 
-  const handleBorderCountry = async (border) => {
-    await axios
-      .get(`https://restcountries.com/v3.1/alpha/${border}`)
-      .then((response) => response.data);
-  };
-
   return (
-    <div className="flex flex-col bg-lightTheme-background dark:bg-darkTheme-background text-lightTheme-color dark:text-darkTheme-color desktop:p-20 mobile:p-10 gap-16 h-screen">
+    <div className="desktop:h-screen flex flex-col bg-lightTheme-background dark:bg-darkTheme-background text-lightTheme-color dark:text-darkTheme-color desktop:p-20 mobile:p-10 gap-16">
       <div>
         <Button
           className="dark:bg-darkTheme-elements text-lightTheme-color dark:text-darkTheme-color"
@@ -53,7 +42,7 @@ const CountryPage = () => {
           <div>
             <span className="text-4xl font-bold">{country[0].name.common}</span>
           </div>
-          <div className="flex desktop:flex-row mobile:flex-col justify-between desktop: gap-20 mobile:gap-8">
+          <div className="flex desktop:flex-row mobile:flex-col desktop: gap-20 mobile:gap-8">
             <div>
               <div>
                 <span className="text-base font-bold">Native Name: </span>
@@ -98,7 +87,7 @@ const CountryPage = () => {
           <div className="flex desktop:flex-row mobile:flex-col desktop:items-center gap-4 mb-20">
             <div>
               <span className="text-lightTheme-color dark:text-darkTheme-color text-base font-bold">
-                Border Countries:{" "}
+                Border Countries:
               </span>
             </div>
             <div className="flex flex-wrap gap-2">

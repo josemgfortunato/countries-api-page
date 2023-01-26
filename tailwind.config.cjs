@@ -29,6 +29,10 @@ module.exports = {
 
       desktop: "1440px",
       // => @media (min-width: 1280px) { ... }
+
+      lg: "1536px",
+      // => @media (min-width: 1536px) { ... }
+
     },
     extend: {
       fontFamily: {

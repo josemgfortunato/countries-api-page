@@ -5,15 +5,13 @@ import Header from "./components/layout/Header";
 
 function App() {
   return (
-    <div className="bg-lightTheme-background dark:bg-darkTheme-background w-screen min-h-screen flex flex-col pb-16">
+    <BrowserRouter>
       <Header />
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Content />} />
-          <Route path="/:id" element={<CountryPage />} />
-        </Routes>
-      </BrowserRouter>
-    </div>
+      <Routes>
+        <Route path="/" element={<Content />} />
+        <Route path="/:id" element={<CountryPage />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
